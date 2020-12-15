@@ -45,6 +45,35 @@ matrix:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - CXXFLAGS="-fsanitize=thread"
       fast_finish: true
+
+      # Adding ppc64le jobs
+    - os: linux
+      arch: ppc64le
+      compiler: gcc
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - CXXFLAGS="-g -O0 -fprofile-arcs -ftest-coverage -fPIC" CFLAGS="-g -O0 -fprofile-arcs -ftest-coverage" gcov="/usr/bin/gcov-7"
+      fast_finish: true
+    - os: linux
+      arch: ppc64le
+      compiler: clang
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+      fast_finish: true
+    - os: linux
+      arch: ppc64le
+      compiler: clang
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - CXXFLAGS="-fsanitize=address"
+      fast_finish: true
+    - os: linux
+      arch: ppc64le
+      compiler: clang
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - CXXFLAGS="-fsanitize=thread"
+      fast_finish: true
       
 before_install:
   - eval "${MATRIX_EVAL}"
